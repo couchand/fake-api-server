@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "author": "Andrew Couch <fake-api-server@andrewcou.ch>",
   "description": "A simple, easy mock REST API server.",
-  "repository": "",
-  "main": "./lib/index",
-  "repository" : {
+  "repository": {
     "type": "git",
     "url": "https://github.com/couchand/fake-api-server.git"
   },
+  "main": "./lib/index",
   "license": "MIT",
   "keywords": [
     "mock",
@@ -16,7 +15,8 @@
     "server"
   ],
   "dependencies": {
-    "express": "~4.2.0"
+    "express": "~4.2.0",
+    "body-parser": "~1.2.0"
   },
   "devDependencies": {
     "chai": "~1.9.1",
