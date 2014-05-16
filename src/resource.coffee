@@ -27,6 +27,7 @@ class Resource
       @_name
     else
       @_name = arguments[0]
+      this
 
   pluralName: ->
     "#{@_name}s"
@@ -40,7 +41,8 @@ class Resource
     this
 
   find: (id) ->
-    record = @_records.filter (d) => "#{d[@_idAttribute]}" is "#{id}"
+    record = @_records.filter (d) =>
+      "#{d[@_idAttribute]}" is "#{id}"
     if record.length then record[0] else no
 
   update: (id, updates) ->
@@ -53,7 +55,8 @@ class Resource
   remove: (id) ->
     record = @find id
     return no unless record
-    @_records = @_records.filter (d) -> d[@_idAttribute] isnt id
+    @_records = @_records.filter (d) =>
+      "#{d[@_idAttribute]}" isnt "#{id}"
     yes
 
 module.exports = Resource
