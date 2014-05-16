@@ -13,6 +13,7 @@ quick start
 -----------
 
 ```javascript
+// server.js
 var fake = require('fake-api-server');
 
 var books = new fake.Resource("Book")
@@ -32,6 +33,10 @@ var server = new fake.Server()
 ```
 
 ```bash
+> node server.js &
+[1] 1337
+server listening on localhost:3000
+
 > curl localhost:3000/api/books
 [{"id":1,"name":"Lords of Finance","author":"Liaquat Ahamed
 ","year":2009},{"id":2,"name":"Public Enemies","author":"Br
