@@ -131,3 +131,22 @@ describe "server", ->
 
     req.write JSON.stringify name: "foobar"
     req.end()
+
+  it "handles DELETE /api/books/:id", ->
+    books = new fake.Resource "book"
+      .add name: "foo"
+
+    server = new fake.Server()
+      .register books
+      .listen port = nextPort()
+
+    req = http.request
+      host: "http://localhost"
+      port: port
+      path: "/api/books/1"
+      method: "DELETE"
+      (res) -> res.on "end", ->
+        all = books.all()
+        all.length.should.equal 0
+
+    req.end()
