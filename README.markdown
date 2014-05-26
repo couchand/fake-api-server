@@ -107,69 +107,68 @@ itself to allow for method chaining.
 
 ###Resource###
 
-new **Resource**`(name)`
+new **Resource**(*name*)
 
-creates a new resource with the given name, which should be in the
-singular form.  the name will be pluralized for the api (see the
-documentation for `pluralName`).
+  * creates a new resource with the given name, which should be in
+    singular form.  the name will be pluralized for the api (see the
+    documentation for `pluralName`).
 
-**idAttribute**`([newVal])`
+**idAttribute**([*newVal*])
 
-gets or sets the id attribute name, which defaults to `id`.
+  * gets or sets the id attribute name, which defaults to `id`.
 
 **idFactory**`([newVal])`
 
-gets or sets the new record id factory.  this should be a method that
-returns a novel unique id each time it's called.
+  * gets or sets the new record id factory.  this should be a method
+    that returns a novel unique id each time it's called.
 
-**name**`([newVal])`
+**name**([*newVal*])
 
-gets or sets the name of the resource.
+  * gets or sets the name of the resource.
 
-**pluralName**`([newVal])`
+**pluralName**([*newVal*])
 
-gets or sets the plural name of the resource, which defaults to the
-name plus "s".
+  * gets or sets the plural name of the resource, which defaults to
+    the name plus "s".
 
-**all**`()`
+**all**()
 
-get all records for this resource.
+  * get all records for this resource.
 
-**add**`(record)`
+**add**(*record*)
 
-add a record to the resource data store.  the id attribute will be
-automatically set.  the record is not copied, so if you need the new
-id you can get it from the object reference passed in.
+  * add a record to the resource data store.  the id attribute will
+    be automatically set.  the record is not copied, so if you need
+    the new id you can get it from the object reference passed in.
 
-**find**`(id)`
+**find**(*id*)
 
-finds a record by id.
+  * finds a record by id.
+  * this method, `update` and `remove` return `false` if the id is
+    not found for this resource.
 
-this method, `update` and `remove` return `false` if the id is not
-found for this resource.
+**update**(*id, updates*)
 
-**update**`(id, updates)`
+  * update a record by id, returning the updated record.
 
-update a record by id, returning the updated record.
+**remove**(*id*)
 
-**remove**`(id)`
-
-remove a record by id, returning a boolean indicating success.
+  * remove a record by id, returning a boolean indicating success.
 
 ###Server###
 
-new **Server**`()`
+new **Server**()
 
-creates a new server.
+  * creates a new server.
 
-**listen**`(port=3000)`
+**listen**(*port*=3000)
 
-starts listening for REST requests on the given port.
+  * starts listening for REST requests on the given port.
 
-**register**`(resource)`
+**register**(*resource*)
 
-register a given resource for the API.  the appropriate REST verbs
-will be routed.
+  * register a given resource for the API.  the appropriate REST
+    verbs will be routed.
 
 more information
 ----------------
