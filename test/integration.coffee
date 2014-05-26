@@ -23,6 +23,8 @@ describe "server", ->
       .listen port = nextPort()
 
     http.get "http://localhost:#{port}/api", (res) ->
+      res.statusCode.should.equal 200
+
       buffer = ''
       res.on 'data', (d) -> buffer += d.toString()
       res.on 'end', ->
@@ -49,6 +51,8 @@ describe "server", ->
       .listen port = nextPort()
 
     http.get "http://localhost:#{port}/api/books", (res) ->
+      res.statusCode.should.equal 200
+
       buffer = ''
       res.on 'data', (d) -> buffer += d.toString()
       res.on 'end', ->
@@ -70,6 +74,8 @@ describe "server", ->
       .listen port = nextPort()
 
     http.get "http://localhost:#{port}/api/books/#{bar.id}", (res) ->
+      res.statusCode.should.equal 200
+
       buffer = ''
       res.on 'data', (d) -> buffer += d.toString()
       res.on 'end', ->
@@ -104,6 +110,8 @@ describe "server", ->
       path: "/api/books"
       method: "POST"
       (res) -> res.on "end", ->
+        res.statusCode.should.equal 200
+
         all = books.all()
         all.length.should.equal 1
         all[0].name.should.equal "foobar"
@@ -125,6 +133,8 @@ describe "server", ->
       path: "/api/books/1"
       method: "PUT"
       (res) -> res.on "end", ->
+        res.statusCode.should.equal 200
+
         all = books.all()
         all.length.should.equal 1
         all[0].name.should.equal "foobar"
@@ -146,6 +156,8 @@ describe "server", ->
       path: "/api/books/1"
       method: "DELETE"
       (res) -> res.on "end", ->
+        res.statusCode.should.equal 200
+
         all = books.all()
         all.length.should.equal 0
 
