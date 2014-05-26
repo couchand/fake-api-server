@@ -77,7 +77,16 @@ OK
 introduction
 ------------
 
-***loading***
+you hold in your hands an extremely simple fake API server built in
+Node.js and aptly named `fake-api-server`.  this little project came
+about after I wrote [a comment][0] on [this HN thread][1] responding
+to [an article][2] by Jeremy Morgan about implementing the same thing
+on a "self-hosted" .NET server.
+
+since the crux of that article was that you want the fake API to get
+out of the way so you can focus on front-end development, it seemed
+prudent to rewrite the code in JavaScript to avoid context-switching
+between languages.
 
 dependencies
 ------------
@@ -94,3 +103,7 @@ more information
 ----------------
 
 ***nothing yet***
+
+[0]: https://news.ycombinator.com/item?id=7743948
+[1]: https://news.ycombinator.com/item?id=7742993
+[2]: http://www.jeremymorgan.com/blog/programming/how-to-create-asp-self-hosted-api/
