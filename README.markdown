@@ -161,7 +161,7 @@ new **Server**()
 
   * creates a new server.
 
-**listen**(*port*=3000)
+**listen**([*port*=3000])
 
   * starts listening for REST requests on the given port.
 
