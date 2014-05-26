@@ -97,7 +97,79 @@ dependencies
 api reference
 -------------
 
-***please wait***
+the API is made up of two types: `Resource` and `Server`.  you create
+a number of resources which you then register with a server.  the
+server listens for requests to `/api` routes and handles the various
+registered resources RESTfully.
+
+any method that doesn't otherwise return a value returns the object
+itself to allow for method chaining.
+
+###Resource###
+
+new **Resource**`(name)`
+
+creates a new resource with the given name, which should be in the
+singular form.  the name will be pluralized for the api (see the
+documentation for `pluralName`).
+
+**idAttribute**`([newVal])`
+
+gets or sets the id attribute name, which defaults to `id`.
+
+**idFactory**`([newVal])`
+
+gets or sets the new record id factory.  this should be a method that
+returns a novel unique id each time it's called.
+
+**name**`([newVal])`
+
+gets or sets the name of the resource.
+
+**pluralName**`([newVal])`
+
+gets or sets the plural name of the resource, which defaults to the
+name plus "s".
+
+**all**`()`
+
+get all records for this resource.
+
+**add**`(record)`
+
+add a record to the resource data store.  the id attribute will be
+automatically set.  the record is not copied, so if you need the new
+id you can get it from the object reference passed in.
+
+**find**`(id)`
+
+finds a record by id.
+
+this method, `update` and `remove` return `false` if the id is not
+found for this resource.
+
+**update**`(id, updates)`
+
+update a record by id, returning the updated record.
+
+**remove**`(id)`
+
+remove a record by id, returning a boolean indicating success.
+
+###Server###
+
+new **Server**`()`
+
+creates a new server.
+
+**listen**`(port=3000)`
+
+starts listening for REST requests on the given port.
+
+**register**`(resource)`
+
+register a given resource for the API.  the appropriate REST verbs
+will be routed.
 
 more information
 ----------------
