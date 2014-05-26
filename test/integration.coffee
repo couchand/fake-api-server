@@ -90,3 +90,23 @@ describe "server", ->
 
     http.get "http://localhost:#{port}/api/books/8383", (res) ->
       res.statusCode.should.equal 404
+
+  it "handles POST /api/books", ->
+    books = new fake.Resource "book"
+
+    server = new fake.Server()
+      .register books
+      .listen port = nextPort()
+
+    req = http.request
+      host: "http://localhost"
+      port: port
+      path: "/api/books"
+      method: "POST"
+      (res) -> res.on "end", ->
+        all = books.all()
+        all.length.should.equal 1
+        all[0].name.should.equal "foobar"
+
+    req.write JSON.stringify name: "foobar"
+    req.end()
