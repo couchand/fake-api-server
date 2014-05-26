@@ -9,6 +9,9 @@ class Server
     @_server = express()
     @_server.use bodyParser()
 
+    @_server.on "error", (err) ->
+      console.error err
+
     @_server.get "/api", (req, res) =>
       res.send @_resources.map (resource) ->
         name: resource.name()
@@ -46,14 +49,14 @@ class Server
       res.send 200
 
     @_server.put url("/:id"), (req, res) ->
-      if resource.update id, req.body
+      if resource.update req.params.id, req.body
         res.send 200
       else
         res.statusCode = 404
         res.send "No #{resource.name()} with id #{req.params.id}"
 
     @_server.delete url("/:id"), (req, res) ->
-      if resource.remove id
+      if resource.remove req.params.id
         res.send 200
       else
         res.statusCode = 404
