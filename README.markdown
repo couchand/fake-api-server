@@ -7,7 +7,6 @@ a simple, easy mock REST API server
   * introduction
   * dependencies
   * api reference
-  * more information
 
 quick start
 -----------
@@ -169,11 +168,6 @@ new **Server**()
 
   * register a given resource for the API.  the appropriate REST
     verbs will be routed.
-
-more information
-----------------
-
-***nothing yet***
 
 [0]: https://news.ycombinator.com/item?id=7743948
 [1]: https://news.ycombinator.com/item?id=7742993
