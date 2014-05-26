@@ -72,6 +72,7 @@ OK
 [{"id":2,"name":"Public Enemies","author":"Bryan Burrough",
 "year":2004}]
 ```
+see `example` and `test/integration` for more examples
 
 introduction
 ------------
