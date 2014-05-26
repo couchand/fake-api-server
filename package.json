@@ -1,6 +1,6 @@
 {
   "name": "fake-api-server",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "Andrew Couch <fake-api-server@andrewcou.ch>",
   "description": "A simple, easy mock REST API server.",
   "repository": {
