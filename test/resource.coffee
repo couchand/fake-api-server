@@ -63,6 +63,13 @@ describe "Resource", ->
     it "pluralizes the name", ->
       r.pluralName().should.equal "#{resourceName}s"
 
+    it "can be changed", ->
+      r.pluralName "Moose"
+      r.pluralName().should.equal "Moose"
+
+    it "chains", ->
+      r.pluralName("Bill").should.equal r
+
   describe "add", ->
     it "adds records", ->
       r.add sparkles = {}

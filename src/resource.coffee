@@ -30,7 +30,14 @@ class Resource
       this
 
   pluralName: ->
-    "#{@_name}s"
+    if arguments.length is 0
+      if @_pluralName
+        @_pluralName
+      else
+        "#{@_name}s"
+    else
+      @_pluralName = arguments[0]
+      this
 
   all: ->
     @_records
