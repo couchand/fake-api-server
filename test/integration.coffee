@@ -184,7 +184,7 @@ describe "server", ->
 
 describe "registered resources", ->
   it "can still be renamed", (done) ->
-    books = new fake.Resource "book"
+    books = new fake.Resource "books"
       .add name: "foo"
       .add name: "bar"
       .add name: "baz"
@@ -193,10 +193,9 @@ describe "registered resources", ->
       .register books
       .listen port = nextPort()
 
-    books.name "foo"
+    books.name "cat"
 
-    total = 2
-
+    total = 5
     complete = (res) ->
       res.statusCode.should.equal 200
       res.on 'data', ->
@@ -204,5 +203,33 @@ describe "registered resources", ->
         if (total -= 1) is 0
           done()
 
-    http.get "http://localhost:#{port}/api/foos", complete
-    http.get "http://localhost:#{port}/api/foos/1", complete
+    http.get "http://localhost:#{port}/api/cats", complete
+    http.get "http://localhost:#{port}/api/cats/1", complete
+
+    req = http.request
+      host: "localhost"
+      port: port
+      path: "/api/cats"
+      method: "POST"
+      complete
+    req.setHeader "Content-Type", "application/json"
+    req.write JSON.stringify name: "foobar"
+    req.end()
+
+    req = http.request
+      host: "localhost"
+      port: port
+      path: "/api/cats/2"
+      method: "PUT"
+      complete
+    req.setHeader "Content-Type", "application/json"
+    req.write JSON.stringify name: "foobar"
+    req.end()
+
+    req = http.request
+      host: "localhost"
+      port: port
+      path: "/api/cats/1"
+      method: "DELETE"
+      complete
+    req.end()

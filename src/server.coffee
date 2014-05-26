@@ -31,6 +31,35 @@ class Server
           else
             res.statusCode = 404
             res.send "No #{resource.name()} with id #{req.params.id}"
+      res.send 404
+
+    @_server.post "/api/:resource", (req, res) =>
+      for resource in @_resources
+        if resource.pluralName() is req.params.resource
+          data = req.body
+          resource.add data
+          res.send 200
+      res.send 404
+
+    @_server.put "/api/:resource/:id", (req, res) =>
+      for resource in @_resources
+        if resource.pluralName() is req.params.resource
+          if resource.update req.params.id, req.body
+            res.send 200
+          else
+            res.statusCode = 404
+            res.send "No #{resource.name()} with id #{req.params.id}"
+      res.send 404
+
+    @_server.delete "/api/:resource/:id", (req, res) =>
+      for resource in @_resources
+        if resource.pluralName() is req.params.resource
+          if resource.remove req.params.id
+            res.send 200
+          else
+            res.statusCode = 404
+            res.send "No #{resource.name()} with id #{req.params.id}"
+      res.send 404
 
   listen: (port=3000) ->
     @_server.listen port
@@ -39,29 +68,6 @@ class Server
 
   register: (resource) ->
     @_resources = @_resources.concat [resource]
-
-    url = (path='') ->
-      "/api/#{resource.pluralName()}#{path}"
-
-    @_server.post url(), (req, res) ->
-      data = req.body
-      resource.add data
-      res.send 200
-
-    @_server.put url("/:id"), (req, res) ->
-      if resource.update req.params.id, req.body
-        res.send 200
-      else
-        res.statusCode = 404
-        res.send "No #{resource.name()} with id #{req.params.id}"
-
-    @_server.delete url("/:id"), (req, res) ->
-      if resource.remove req.params.id
-        res.send 200
-      else
-        res.statusCode = 404
-        res.send "No #{resource.name()} with id #{req.params.id}"
-
     this
 
 module.exports = Server
