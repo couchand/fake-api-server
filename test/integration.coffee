@@ -110,3 +110,24 @@ describe "server", ->
 
     req.write JSON.stringify name: "foobar"
     req.end()
+
+  it "handles PUT /api/books/:id", ->
+    books = new fake.Resource "book"
+      .add name: "foo"
+
+    server = new fake.Server()
+      .register books
+      .listen port = nextPort()
+
+    req = http.request
+      host: "http://localhost"
+      port: port
+      path: "/api/books/1"
+      method: "PUT"
+      (res) -> res.on "end", ->
+        all = books.all()
+        all.length.should.equal 1
+        all[0].name.should.equal "foobar"
+
+    req.write JSON.stringify name: "foobar"
+    req.end()
