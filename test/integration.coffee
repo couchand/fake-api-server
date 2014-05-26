@@ -162,3 +162,24 @@ describe "server", ->
         all.length.should.equal 0
 
     req.end()
+
+describe "registered resources", ->
+  it "can still be renamed", ->
+    books = new fake.Resource "book"
+      .add name: "foo"
+      .add name: "bar"
+      .add name: "baz"
+
+    server = new fake.Server()
+      .register books
+      .listen port = nextPort()
+
+    books.name "foo"
+
+    complete = (res) ->
+      res.statusCode.should.equal 200
+      res.on 'data', ->
+      res.on 'end', ->
+
+    http.get "http://localhost:#{port}/api/foos", complete
+    http.get "http://localhost:#{port}/api/foos/1", complete

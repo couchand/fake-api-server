@@ -14,6 +14,21 @@ class Server
         name: resource.name()
         url: "/api/#{resource.pluralName()}"
 
+    @_server.get "/api/:resource", (req, res) =>
+      for resource in @_resources
+        if resource.pluralName() is req.params.resource
+          return res.send resource.all()
+      res.send 404
+
+    @_server.get "/api/:resource/:id", (req, res) =>
+      for resource in @_resources
+        if resource.pluralName() is req.params.resource
+          if data = resource.find req.params.id
+            return res.send data
+          else
+            res.statusCode = 404
+            res.send "No #{resource.name()} with id #{req.params.id}"
+
   listen: (port=3000) ->
     @_server.listen port
     console.log "server listening on localhost:#{port}"
@@ -24,17 +39,6 @@ class Server
 
     url = (path='') ->
       "/api/#{resource.pluralName()}#{path}"
-
-    @_server.get url(), (req, res) ->
-      res.send resource.all()
-
-    @_server.get url("/:id"), (req, res) ->
-      data = resource.find req.params.id
-      if data
-        res.send data
-      else
-        res.statusCode = 404
-        res.send "No #{resource.name()} with id #{req.params.id}"
 
     @_server.post url(), (req, res) ->
       data = req.body
