@@ -3,7 +3,7 @@
 chai = require 'chai'
 chai.should()
 
-Resource = require '../src/resource'
+Resource = require '../lib/resource'
 
 describe "Resource", ->
   resourceName = "Foobar"
