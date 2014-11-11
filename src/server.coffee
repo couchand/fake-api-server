@@ -19,7 +19,10 @@ class Server
 
     @_server.get "/api/:resource", (req, res) =>
       @find req.params.resource, (resource) ->
-        return res.send resource.all()
+        if resource == null
+          res.send 404
+        else
+          return res.send resource.all()
 
     @_server.get "/api/:resource/:id", (req, res) =>
       @find req.params.resource, (resource) ->
@@ -55,7 +58,7 @@ class Server
     for resource in @_resources
       if resource.pluralName() is path
         return cb resource
-    res.send 404
+    cb null
 
   listen: (port=3000) ->
     @_server.listen port

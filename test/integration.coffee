@@ -67,6 +67,14 @@ describe "server", ->
 
         done()
 
+  it "handles 404 on /api/idontexist", (done) ->
+    port = nextPort()
+    server = new fake.Server()
+      .listen port
+    http.get "http://localhost:#{port}/api/idontexist", (res) ->
+      res.statusCode.should.equal 404
+      done()
+
   it "handles GET /api/books/:id", (done) ->
     books = new fake.Resource "book"
       .add name: "foo"
