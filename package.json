@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/couchand/fake-api-server.git"
   },
+  "scripts": {
+    "test": "make && mocha"
+  },
   "main": "./lib/index",
   "license": "MIT",
   "keywords": [
