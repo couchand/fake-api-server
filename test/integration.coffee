@@ -67,10 +67,10 @@ describe "server", ->
 
         done()
 
-  it "handles 404 on /api/idontexist", (done) ->
-    port = nextPort()
+  it "handles 404 on GET /api/idontexist", (done) ->
     server = new fake.Server()
-      .listen port
+      .listen port = nextPort()
+
     http.get "http://localhost:#{port}/api/idontexist", (res) ->
       res.statusCode.should.equal 404
       done()
@@ -112,6 +112,14 @@ describe "server", ->
       res.statusCode.should.equal 404
       done()
 
+  it "handles 404 on GET /api/idontexist/:id", (done) ->
+    server = new fake.Server()
+      .listen port = nextPort()
+
+    http.get "http://localhost:#{port}/api/idontexist/1337", (res) ->
+      res.statusCode.should.equal 404
+      done()
+
   it "handles POST /api/books", (done) ->
     books = new fake.Resource "book"
 
@@ -134,6 +142,23 @@ describe "server", ->
           all.length.should.equal 1
           all[0].name.should.equal "foobar"
           done()
+
+    req.setHeader "Content-Type", "application/json"
+    req.write JSON.stringify name: "foobar"
+    req.end()
+
+  it "handles 404 on POST /api/idontexist", (done) ->
+    server = new fake.Server()
+      .listen port = nextPort()
+
+    req = http.request
+      host: "localhost"
+      port: port
+      path: "/api/idontexist"
+      method: "POST"
+      (res) ->
+        res.statusCode.should.equal 404
+        done()
 
     req.setHeader "Content-Type", "application/json"
     req.write JSON.stringify name: "foobar"
@@ -167,6 +192,23 @@ describe "server", ->
     req.write JSON.stringify name: "foobar"
     req.end()
 
+  it "handles 404 on PUT /api/idontexist/:id", (done) ->
+    server = new fake.Server()
+      .listen port = nextPort()
+
+    req = http.request
+      host: "localhost"
+      port: port
+      path: "/api/idontexist/1"
+      method: "PUT"
+      (res) ->
+        res.statusCode.should.equal 404
+        done()
+
+    req.setHeader "Content-Type", "application/json"
+    req.write JSON.stringify name: "foobar"
+    req.end()
+
   it "handles DELETE /api/books/:id", (done) ->
     books = new fake.Resource "book"
       .add name: "foo"
@@ -188,6 +230,23 @@ describe "server", ->
           all.length.should.equal 0
           done()
 
+    req.end()
+
+  it "handles 404 on DELETE /api/idontexist/:id", (done) ->
+    server = new fake.Server()
+      .listen port = nextPort()
+
+    req = http.request
+      host: "localhost"
+      port: port
+      path: "/api/idontexist/1"
+      method: "DELETE"
+      (res) ->
+        res.statusCode.should.equal 404
+        done()
+
+    req.setHeader "Content-Type", "application/json"
+    req.write JSON.stringify name: "foobar"
     req.end()
 
 describe "registered resources", ->

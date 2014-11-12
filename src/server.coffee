@@ -19,27 +19,36 @@ class Server
 
     @_server.get "/api/:resource", (req, res) =>
       @find req.params.resource, (resource) ->
-        if resource == null
-          res.send 404
-        else
-          return res.send resource.all()
+        unless resource
+          return res.send 404
+
+        res.send resource.all()
 
     @_server.get "/api/:resource/:id", (req, res) =>
       @find req.params.resource, (resource) ->
-        if data = resource.find req.params.id
-          return res.send data
-        else
+        unless resource
+          return res.send 404
+
+        unless data = resource.find req.params.id
           res.statusCode = 404
-          res.send "No #{resource.name()} with id #{req.params.id}"
+          return res.send "No #{resource.name()} with id #{req.params.id}"
+
+        res.send data
 
     @_server.post "/api/:resource", (req, res) =>
       @find req.params.resource, (resource) ->
+        unless resource
+          return res.send 404
+
         data = req.body
         resource.add data
         res.send 200
 
     @_server.put "/api/:resource/:id", (req, res) =>
       @find req.params.resource, (resource) ->
+        unless resource
+          return res.send 404
+
         if resource.update req.params.id, req.body
           res.send 200
         else
@@ -48,6 +57,9 @@ class Server
 
     @_server.delete "/api/:resource/:id", (req, res) =>
       @find req.params.resource, (resource) ->
+        unless resource
+          return res.send 404
+
         if resource.remove req.params.id
           res.send 200
         else
