@@ -170,6 +170,10 @@ new **Server**()
   * register a given resource for the API.  the appropriate REST
     verbs will be routed.
 
+**static**(*path*)
+
+  * add a static path to the server for optional static contents(demo html, assets)
+
 [0]: https://news.ycombinator.com/item?id=7743948
 [1]: https://news.ycombinator.com/item?id=7742993
 [2]: http://www.jeremymorgan.com/blog/programming/how-to-create-asp-self-hosted-api/
