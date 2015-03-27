@@ -72,6 +72,11 @@ class Server
         return cb resource
     cb null
 
+  static: (path) ->
+   @_server.use express.static(path)
+   console.log "server add static content from #{path}"
+   this
+  
   listen: (port=3000) ->
     @_server.listen port
     console.log "server listening on localhost:#{port}"
