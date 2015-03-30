@@ -7,6 +7,7 @@ a simple, easy mock REST API server
   * introduction
   * dependencies
   * api reference
+  * contributing
 
 quick start
 -----------
@@ -169,6 +170,21 @@ new **Server**()
 
   * register a given resource for the API.  the appropriate REST
     verbs will be routed.
+
+contributing
+------------
+
+Contributions are most welcome!  Please maintain the style of the
+existing code and docs, which includes:
+
+  * add tests and documentation for new features
+  * limit line length to 70 characters
+
+Many thanks to the following folks for their contributions!
+
+  * @mindeavor
+  * @tornad
+  * @temnoregg
 
 [0]: https://news.ycombinator.com/item?id=7743948
 [1]: https://news.ycombinator.com/item?id=7742993
