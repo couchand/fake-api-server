@@ -179,6 +179,8 @@ existing code and docs, which includes:
 
   * add tests and documentation for new features
   * limit line length to 70 characters
+  * run `make` to build and test
+  * commit the CoffeeScript compilation seperately
 
 Many thanks to the following folks for their contributions!
 
