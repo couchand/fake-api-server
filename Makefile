@@ -1,7 +1,7 @@
 all: compile test
 
-compile:
-	coffee -c -o lib src/*.coffee
+compile: node_modules
+	node_modules/coffee-script/bin/coffee -c -o lib src/*.coffee
 
 test: node_modules
 	node_modules/mocha/bin/mocha
