@@ -11,3 +11,5 @@ books = new fake.Resource "book"
 server = new fake.Server()
   .register books
   .listen 3000
+
+console.log "server listening on localhost:3000"

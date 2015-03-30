@@ -35,3 +35,5 @@ server = new fake.Server()
   .register books
   .register music
   .listen()
+
+console.log "server listening on localhost:3000"

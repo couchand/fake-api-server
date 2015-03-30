@@ -74,7 +74,6 @@ class Server
 
   listen: (port=3000) ->
     @_server.listen port
-    console.log "server listening on localhost:#{port}"
     this
 
   register: (resource) ->
