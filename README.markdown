@@ -172,7 +172,8 @@ new **Server**()
 
 **static**(*path*)
 
-  * add a static path to the server for optional static contents(demo html, assets)
+  * add a static path to the server for optional static
+    contents(html, assets, ...)
 
 [0]: https://news.ycombinator.com/item?id=7743948
 [1]: https://news.ycombinator.com/item?id=7742993
