@@ -74,7 +74,6 @@ class Server
 
   static: (path) ->
    @_server.use express.static(path)
-   console.log "server add static content from #{path}"
    this
   
   listen: (port=3000) ->
