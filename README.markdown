@@ -171,6 +171,11 @@ new **Server**()
   * register a given resource for the API.  the appropriate REST
     verbs will be routed.
 
+**static**(*path*)
+
+  * add a static path to the server for optional static
+    contents(html, assets, ...)
+
 contributing
 ------------
 

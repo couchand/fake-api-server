@@ -72,6 +72,10 @@ class Server
         return cb resource
     cb null
 
+  static: (path) ->
+   @_server.use express.static(path)
+   this
+
   listen: (port=3000) ->
     @_server.listen port
     this
