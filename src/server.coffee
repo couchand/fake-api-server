@@ -9,7 +9,7 @@ class Server
 
     @_resources = []
     @_server = express()
-    @_server.use bodyParser()
+    @_server.use bodyParser.json()
 
     @_server.on "error", (err) ->
       console.error err
