@@ -3,6 +3,9 @@
 express = require 'express'
 bodyParser = require 'body-parser'
 
+# remove dependency when possible
+deprecate = require 'deprecate'
+
 class Server
   constructor: ->
     @_resources = []
@@ -78,9 +81,11 @@ class Server
    this
 
   static: (path) ->
-    console.error "The static method on fake-api-server is deprecated."
-    console.error " Please use the following code instead:"
-    console.error "     server.use(express.static(path))"
+    deprecate """
+The static method on fake-api-server is deprecated.
+Please use the following code instead:
+    server.use(express.static(path))
+"""
     @use express.static path
 
   listen: (port=3000) ->

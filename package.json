@@ -18,8 +18,9 @@
     "server"
   ],
   "dependencies": {
-    "express": "~4.2.0",
-    "body-parser": "~1.2.0"
+    "body-parser": "~1.2.0",
+    "deprecate": "^0.1.0",
+    "express": "~4.2.0"
   },
   "devDependencies": {
     "chai": "~1.9.1",
