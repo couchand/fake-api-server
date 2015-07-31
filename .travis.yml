@@ -6,5 +6,7 @@ node_js:
   - "0.10"
   - "iojs"
 
+sudo: false
+
 script:
   - make
