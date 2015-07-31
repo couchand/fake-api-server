@@ -370,7 +370,7 @@ describe "use middleware", ->
         called.should.be.true
         done()
 
-describe "(DEPRECATED) static content", ->
+describe "static content", ->
   it "handles 404 GET /integration.coffee without static", (done) ->
 
     server = new fake.Server()
