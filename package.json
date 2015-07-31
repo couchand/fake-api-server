@@ -18,13 +18,12 @@
     "server"
   ],
   "dependencies": {
-    "body-parser": "~1.2.0",
-    "deprecate": "^0.1.0",
-    "express": "~4.2.0"
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1"
   },
   "devDependencies": {
-    "chai": "~1.9.1",
-    "mocha": "~1.18.2",
-    "coffee-script": "~1.8.0"
+    "chai": "^3.2.0",
+    "coffee-script": "^1.9.3",
+    "mocha": "^2.2.5"
   }
 }
