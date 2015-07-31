@@ -12,6 +12,7 @@ class Server
     @_server.on "error", (err) ->
       console.error err
 
+  _setupRoutes: ->
     @_server.get "/api", (req, res) =>
       res.send @_resources.map (resource) ->
         name: resource.name()
@@ -77,6 +78,10 @@ class Server
    this
 
   listen: (port=3000) ->
+    throw new Error "Cannot call listen more than once!" if @_initialized
+    @_setupRoutes()
+    @_initialized = yes
+
     @_server.listen port
     this
 
