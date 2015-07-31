@@ -369,3 +369,33 @@ describe "use middleware", ->
         res.statusCode.should.equal 200
         called.should.be.true
         done()
+
+describe "(DEPRECATED) static content", ->
+  it "handles 404 GET /integration.coffee without static", (done) ->
+
+    server = new fake.Server()
+      .listen port = nextPort()
+
+    http.get "http://localhost:#{port}/integration.coffee", (res) ->
+      res.statusCode.should.equal 404
+      done()
+
+  it "handles 200 GET /integration.coffee with static", (done) ->
+
+    server = new fake.Server()
+      .static __dirname
+      .listen port = nextPort()
+
+    http.get "http://localhost:#{port}/integration.coffee", (res) ->
+      res.statusCode.should.equal 200
+      done()
+
+  it "handles 404 GET /notfound.coffee with static", (done) ->
+
+    server = new fake.Server()
+      .static __dirname
+      .listen port = nextPort()
+
+    http.get "http://localhost:#{port}/notfound.coffee", (res) ->
+      res.statusCode.should.equal 404
+      done()

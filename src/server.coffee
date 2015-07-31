@@ -77,6 +77,12 @@ class Server
    @_server.use middleware
    this
 
+  static: (path) ->
+    console.error "The static method on fake-api-server is deprecated."
+    console.error " Please use the following code instead:"
+    console.error "     server.use(express.static(path))"
+    @use express.static path
+
   listen: (port=3000) ->
     throw new Error "Cannot call listen more than once!" if @_initialized
     @_setupRoutes()
