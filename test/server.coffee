@@ -18,3 +18,8 @@ describe "server", ->
       server.listen 3001
 
       (-> server.listen 3002).should.throw /listen/
+
+  describe "constructor", ->
+    it "doesn't require new", ->
+      server = Server()
+      server.should.be.an.instanceOf Server

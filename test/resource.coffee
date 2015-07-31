@@ -144,3 +144,8 @@ describe "Resource", ->
 
     it "returns false when no record found", ->
       r.remove(935).should.be.false
+
+  describe "constructor", ->
+    it "doesn't require new", ->
+      thingy = Resource()
+      thingy.should.be.an.instanceOf Resource

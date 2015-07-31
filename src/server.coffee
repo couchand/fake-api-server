@@ -8,6 +8,8 @@ deprecate = require 'deprecate'
 
 class Server
   constructor: ->
+    return new Server() unless @ instanceof Server
+
     @_resources = []
     @_server = express()
     @_server.use bodyParser()

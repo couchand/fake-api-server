@@ -2,6 +2,8 @@
 
 class Resource
   constructor: (@_name) ->
+    return new Resource _name unless @ instanceof Resource
+
     @_records = []
     @_idAttribute = "id"
     @_idFactory   = =>
