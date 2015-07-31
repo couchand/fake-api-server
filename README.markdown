@@ -96,6 +96,7 @@ dependencies
 
   * node
   * express
+  * body-parser
 
 api reference
 -------------
