@@ -179,6 +179,13 @@ new **Server**()
   * add a middleware to the underlying express server.  for example,
     to serve static content, try  `server.use(express.static(dirname))`.
 
+**static**(*path*)
+
+  * a convenience method for adding the express builtin static middleware,
+    as in the above example.  useful if you would not have otherwise
+    needed to load express yourself.  serve static html, javascript,
+    images and other content along with the fake api.
+
 contributing
 ------------
 
