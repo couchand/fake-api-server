@@ -36,10 +36,10 @@ var server = new fake.Server()
 
 ```bash
 > npm install fake-api-server
-npm http GET https://registry.npmjs.org/fake-api-server/0.3.0
-npm http 200 https://registry.npmjs.org/fake-api-server/0.3.0
+npm http GET https://registry.npmjs.org/fake-api-server/0.4.0
+npm http 200 https://registry.npmjs.org/fake-api-server/0.4.0
 ...
-fake-api-server@0.3.0 node_modules/fake-api-server
+fake-api-server@0.4.0 node_modules/fake-api-server
 
 > node server.js &
 [1] 1337
