@@ -5,6 +5,7 @@ chai.should()
 
 fake = require '../lib'
 http = require 'http'
+express = require 'express'
 
 _port = 6000
 nextPort = -> _port = _port + 1
@@ -301,32 +302,70 @@ describe "registered resources", ->
       complete
     req.end()
 
-describe "static content", ->
-  it "handles 404 GET /integration.coffee without static", (done) ->
+describe "use middleware", ->
+  describe "loaded after listen", ->
+    it "uses middleware for new resources", (done) ->
+      called = no
+      middleware = (req, res) -> called = yes; res.status(200).end()
 
-    server = new fake.Server()
-      .listen port = nextPort()
+      server = new fake.Server()
+        .listen port = nextPort()
+        .use middleware
 
-    http.get "http://localhost:#{port}/integration.coffee", (res) ->
-      res.statusCode.should.equal 404
-      done()
+      http.get "http://localhost:#{port}/index.html", (res) ->
+        res.statusCode.should.equal 200
+        called.should.be.true
+        done()
 
-  it "handles 200 GET /integration.coffee with static", (done) ->
+    it "is shadowed by the standard routes", (done) ->
+      called = no
+      middleware = (req, res) -> called = yes; res.status(200).end()
 
-    server = new fake.Server()
-      .static __dirname
-      .listen port = nextPort()
+      server = new fake.Server()
+        .listen port = nextPort()
+        .use middleware
 
-    http.get "http://localhost:#{port}/integration.coffee", (res) ->
-      res.statusCode.should.equal 200
-      done()
+      http.get "http://localhost:#{port}/api", (res) ->
+        res.statusCode.should.equal 200
+        called.should.be.false
+        done()
 
-  it "handles 404 GET /notfound.coffee with static", (done) ->
+  describe "loaded before listen", ->
+    it "uses middleware for new resources", (done) ->
+      called = no
+      middleware = (req, res) -> called = yes; res.status(200).end()
 
-    server = new fake.Server()
-      .static __dirname
-      .listen port = nextPort()
+      server = new fake.Server()
+        .use middleware
+        .listen port = nextPort()
 
-    http.get "http://localhost:#{port}/notfound.coffee", (res) ->
-      res.statusCode.should.equal 404
-      done()
+      http.get "http://localhost:#{port}/index.html", (res) ->
+        res.statusCode.should.equal 200
+        called.should.be.true
+        done()
+
+    it "shadows the standard routes", (done) ->
+      called = no
+      middleware = (req, res) -> called = yes; res.status(500).end()
+
+      server = new fake.Server()
+        .use middleware
+        .listen port = nextPort()
+
+      http.get "http://localhost:#{port}/api", (res) ->
+        res.statusCode.should.equal 500
+        called.should.be.true
+        done()
+
+    it "passes through to the standard routes", (done) ->
+      called = no
+      middleware = (req, res, next) -> called = yes; next()
+
+      server = new fake.Server()
+        .use middleware
+        .listen port = nextPort()
+
+      http.get "http://localhost:#{port}/api", (res) ->
+        res.statusCode.should.equal 200
+        called.should.be.true
+        done()

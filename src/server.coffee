@@ -73,8 +73,8 @@ class Server
         return cb resource
     cb null
 
-  static: (path) ->
-   @_server.use express.static(path)
+  use: (middleware) ->
+   @_server.use middleware
    this
 
   listen: (port=3000) ->
