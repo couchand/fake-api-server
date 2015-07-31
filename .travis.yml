@@ -8,5 +8,8 @@ node_js:
 
 sudo: false
 
+before_install:
+  - npm install -g grunt-cli
+
 script:
-  - make
+  - grunt
