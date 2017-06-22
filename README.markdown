@@ -18,7 +18,7 @@ quick start
 // server.js
 var fake = require('fake-api-server');
 
-var books = new fake.Resource("Book")
+var books = new fake.Resource("book")
   .add({
     name: "Lords of Finance",
     author: "Liaquat Ahamed",
@@ -203,6 +203,8 @@ Many thanks to the following folks for their contributions!
   * @tornad
   * @temnoregg
   * @evrenkutar
+  * @IgorGanapolsky
+  * @krcourville
 
 [0]: https://news.ycombinator.com/item?id=7743948
 [1]: https://news.ycombinator.com/item?id=7742993
