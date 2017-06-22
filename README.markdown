@@ -109,7 +109,7 @@ registered resources RESTfully.
 any method that doesn't otherwise return a value returns the object
 itself to allow for method chaining.
 
-###Resource###
+### Resource ###
 
 new **Resource**(*name*)
 
@@ -159,7 +159,7 @@ new **Resource**(*name*)
 
   * remove a record by id, returning a boolean indicating success.
 
-###Server###
+### Server ###
 
 new **Server**()
 
